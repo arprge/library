@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Поиск книг - Библиотека</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="container">
+                <div class="logo">
+                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
+                        <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
+                    </svg>
+                    <span>Моя Библиотека</span>
+                </div>
+                <ul class="nav-links">
+                    <li><a href="index.html">Главная</a></li>
+                    <li><a href="search.html" class="active">Поиск книг</a></li>
+                    <li><a href="my-books.html">Мои книги</a></li>
+                    <li><a href="about.html">О библиотеке</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section class="search-section">
+            <div class="container">
+                <h1>Поиск книг</h1>
+                
+                <div class="search-container">
+                    <input type="text" id="searchInput" class="search-input" placeholder="Введите название книги, автора или жанр...">
+                    <button id="searchBtn" class="btn btn-primary">Поиск</button>
+                </div>
+
+                <div class="filters">
+                    <h3>Фильтры</h3>
+                    <div class="filter-group">
+                        <label for="genreFilter">Жанр:</label>
+                        <select id="genreFilter" class="filter-select">
+                            <option value="">Все жанры</option>
+                            <option value="Классика">Классика</option>
+                            <option value="Фантастика">Фантастика</option>
+                            <option value="Детектив">Детектив</option>
+                            <option value="Роман">Роман</option>
+                            <option value="Приключения">Приключения</option>
+                            <option value="Философия">Философия</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div id="searchResults" class="search-results">
+                    <div id="resultsCount" class="results-count"></div>
+                    <div id="booksGrid" class="books-grid">
+                        <!-- Результаты поиска будут отображаться здесь -->
+                    </div>
+                    <div id="noResults" class="no-results" style="display: none;">
+                        <p>Книги не найдены. Попробуйте изменить параметры поиска.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 Моя Библиотека. Учебный проект.</p>
+        </div>
+    </footer>
+
+    <script src="books-data.js"></script>
+    <script src="script.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            initSearch();
+        });
+    </script>
+</body>
+</html>

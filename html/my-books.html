@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Мои книги - Библиотека</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="container">
+                <div class="logo">
+                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
+                        <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
+                    </svg>
+                    <span>Моя Библиотека</span>
+                </div>
+                <ul class="nav-links">
+                    <li><a href="index.html">Главная</a></li>
+                    <li><a href="search.html">Поиск книг</a></li>
+                    <li><a href="my-books.html" class="active">Мои книги</a></li>
+                    <li><a href="about.html">О библиотеке</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section class="my-books-section">
+            <div class="container">
+                <h1>Мои книги</h1>
+
+                <div class="stats-container">
+                    <div class="stat-card">
+                        <div class="stat-number" id="readCount">0</div>
+                        <div class="stat-label">Прочитано</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number" id="planCount">0</div>
+                        <div class="stat-label">В планах</div>
+                    </div>
+                </div>
+
+                <div class="tabs">
+                    <button class="tab-btn active" data-tab="read">Прочитанные</button>
+                    <button class="tab-btn" data-tab="plan">Хочу прочитать</button>
+                </div>
+
+                <div class="tab-content">
+                    <div id="readTab" class="tab-pane active">
+                        <div id="readBooks" class="books-grid">
+                            <!-- Прочитанные книги -->
+                        </div>
+                        <div id="emptyRead" class="empty-state">
+                            <p>У вас пока нет прочитанных книг</p>
+                            <a href="search.html" class="btn btn-primary">Найти книги</a>
+                        </div>
+                    </div>
+
+                    <div id="planTab" class="tab-pane">
+                        <div id="planBooks" class="books-grid">
+                            <!-- Книги в планах -->
+                        </div>
+                        <div id="emptyPlan" class="empty-state">
+                            <p>У вас пока нет книг в списке желаемого</p>
+                            <a href="search.html" class="btn btn-primary">Найти книги</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 Моя Библиотека. Учебный проект.</p>
+        </div>
+    </footer>
+
+    <script src="books-data.js"></script>
+    <script src="script.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            initMyBooks();
+        });
+    </script>
+</body>
+</html>
