@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Библиотека - Главная</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="container">
+                <div class="logo">
+                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
+                        <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
+                    </svg>
+                    <span>Моя Библиотека</span>
+                </div>
+                <ul class="nav-links">
+                    <li><a href="index.html" class="active">Главная</a></li>
+                    <li><a href="search.html">Поиск книг</a></li>
+                    <li><a href="my-books.html">Мои книги</a></li>
+                    <li><a href="about.html">О библиотеке</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero">
+            <div class="container">
+                <h1>Добро пожаловать в вашу личную библиотеку</h1>
+                <p>Управляйте своими книгами, отслеживайте прочитанное и планируйте что читать дальше</p>
+                <div class="hero-buttons">
+                    <a href="search.html" class="btn btn-primary">Найти книгу</a>
+                    <a href="my-books.html" class="btn btn-secondary">Мои списки</a>
+                </div>
+            </div>
+        </section>
+
+        <section class="features">
+            <div class="container">
+                <h2>Возможности</h2>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">📚</div>
+                        <h3>Каталог книг</h3>
+                        <p>Обширная коллекция книг различных жанров и авторов</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">🔍</div>
+                        <h3>Быстрый поиск</h3>
+                        <p>Найдите нужную книгу по названию, автору или жанру</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">✓</div>
+                        <h3>Списки чтения</h3>
+                        <p>Отмечайте прочитанные книги и создавайте список желаемого</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">📊</div>
+                        <h3>Статистика</h3>
+                        <p>Отслеживайте свой прогресс в чтении</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="popular-books">
+            <div class="container">
+                <h2>Популярные книги</h2>
+                <div id="popularBooksGrid" class="books-grid">
+                    <!-- Книги будут загружены через JavaScript -->
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 Моя Библиотека. Учебный проект.</p>
+        </div>
+    </footer>
+
+    <script src="books-data.js"></script>
+    <script src="script.js"></script>
+    <script>
+        // Загрузка популярных книг на главную страницу
+        document.addEventListener('DOMContentLoaded', () => {
+            displayPopularBooks();
+        });
+    </script>
+</body>
+</html>
