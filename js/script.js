@@ -17,7 +17,7 @@ const Storage = {
             readBooks.push(book);
             localStorage.setItem('readBooks', JSON.stringify(readBooks));
             
-            // Удаляем из планов если была там
+            // Удаляем из планов 
             this.removeFromPlanBooks(book.id);
             return true;
         }
@@ -56,7 +56,7 @@ const Storage = {
     }
 };
 
-// Создание карточки книги
+// Создание карточки книггггиии
 function createBookCard(book, showActions = true) {
     const card = document.createElement('div');
     card.className = 'book-card';
@@ -101,7 +101,6 @@ function createBookCard(book, showActions = true) {
 // Глобальный кэш книг для быстрого доступа
 let booksCache = [];
 
-// Добавление книги в прочитанные
 function addToRead(bookId) {
     const book = booksCache.find(b => b.id === bookId);
     if (book && Storage.addToReadBooks(book)) {
@@ -112,6 +111,32 @@ function addToRead(bookId) {
         } else if (window.location.pathname.includes('my-books.html')) {
             loadMyBooks();
         }
+    }
+}
+
+function addToPlan(bookId) {
+    const book = booksCache.find(b => b.id === bookId);
+    if (book && Storage.addToPlanBooks(book)) {
+        showNotification('Кітап жоспарға қосылды');
+        if (window.location.pathname.includes('search.html')) {
+            performSearch();
+        } else if (window.location.pathname.includes('my-books.html')) {
+            loadMyBooks();
+        }
+    }
+}
+
+function removeFromList(bookId, listType) {
+    if (listType === 'read') {
+        Storage.removeFromReadBooks(bookId);
+    } else if (listType === 'plan') {
+        Storage.removeFromPlanBooks(bookId);
+    }
+    showNotification('Кітап тізімнен жойылды');
+    if (window.location.pathname.includes('my-books.html')) {
+        loadMyBooks();
+    } else if (window.location.pathname.includes('search.html')) {
+        performSearch();
     }
 }
 
@@ -172,7 +197,7 @@ style.textContent = `
 document.head.appendChild(style);
 
 // === ФУНКЦИИ ДЛЯ ГЛАВНОЙ СТРАНИЦЫ ===
-//async function displayPopularBooks() {
+/*async function displayPopularBooks() {
     const grid = document.getElementById('popularBooksGrid');
     if (!grid) return;
     
@@ -188,7 +213,7 @@ document.head.appendChild(style);
     } catch (error) {
         grid.innerHTML = '<div style="grid-column: 1/-1; text-align: center; padding: 2rem; color: red;">Ошибка загрузки книг</div>';
     }
-} 
+} */
 
 // === ФУНКЦИИ ДЛЯ СТРАНИЦЫ ПОИСКА ===
 function initSearch() {

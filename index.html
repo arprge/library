@@ -53,37 +53,74 @@
 
         <!-- From nu-->
 
-<section class="library-hours" style="background-color:#eaebec; padding:60px 0;">
+<section class="library-hours">
     <div class="container">
-        <h2 style="color: rgb(43, 116, 189); font-size:36px; font-family:'Merriweather', serif;">See hours and locations</h2>
-        <table class="s-lc-w-today" style="width:100%; margin-top:20px;">
-            <caption class="s-lc-w-sr-only">Display of Opening hours</caption>
-            <thead>
-                <tr>
-                    <th colspan="2">
-                        <button class="s-lc-w-btn s-lc-w-next" data-date="2025-10-29">Next Day</button>
-                        <span class="s-lc-w-head-pre">Hours<br></span>
-                        <span>Tuesday, October 28, 2025</span>
-                    </th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>Main Library</td>
-                    <td><span class="s-lc-time">8:30am – 7:45pm</span></td>
-                </tr>
-                <tr>
-                    <td>NUSoM Library</td>
-                    <td><span class="s-lc-time">8:30am – 7:45pm</span></td>
-                </tr>
-                <tr>
-                    <td>Booking Hours</td>
-                    <td><span class="s-lc-time">9:00am – 7:00pm</span></td>
-                </tr>
-            </tbody>
-        </table>
-        <div class="s-lc-w-today-view-all" style="margin-top:10px;">
-            <a href="https://nu-kz.libcal.com/hours/" class="s-lc-w-today-view-link">View all Hours</a>
+        <h2>Жұмыс кестесі және орналасқан жері</h2>
+        
+        <div class="schedule-container">
+            <div class="schedule-card">
+                <h3>📅 Апта бойынша жұмыс кестесі</h3>
+                <table class="schedule-table">
+                    <thead>
+                        <tr>
+                            <th>Күн</th>
+                            <th>Жұмыс уақыты</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Дүйсенбі</strong></td>
+                            <td>09:00 – 20:00</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Сейсенбі</strong></td>
+                            <td>09:00 – 20:00</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Сәрсенбі</strong></td>
+                            <td>09:00 – 20:00</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Бейсенбі</strong></td>
+                            <td>09:00 – 20:00</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Жұма</strong></td>
+                            <td>09:00 – 18:00</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Сенбі</strong></td>
+                            <td>10:00 – 17:00</td>
+                        </tr>
+                        <tr class="closed-day">
+                            <td><strong>Жексенбі</strong></td>
+                            <td>Демалыс күні</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="location-card">
+                <h3>📍 Орналасқан жері</h3>
+                <div class="location-info">
+                    <p><strong>Алатау қаласының орталық кітапханасы</strong></p>
+                    <p>📧 Email: library@alatau.kz</p>
+                    <p>📞 Телефон: +7 (727) 555-01-23</p>
+                    <p>🏢 Мекенжай: Алатау қаласы, Абай даңғылы, 123</p>
+                </div>
+                
+                <div class="additional-info">
+                    <h4>⏰ Түскі үзіліс</h4>
+                    <p>13:00 – 14:00 (барлық күндері)</p>
+                    
+                    <h4>📚 Кітап беру қызметі</h4>
+                    <p>Жұмыс уақыты ішінде</p>
+                    
+                    <h4>🎯 Оқу залдары</h4>
+                    <p>Дүйсенбі - Жұма: 08:30 – 20:30</p>
+                    <p>Сенбі: 09:30 – 17:30</p>
+                </div>
+            </div>
         </div>
     </div>
 </section>
@@ -116,6 +153,9 @@
             <p>&copy; 2025 Кітапхана. Алжан Алан</p>
         </div>
     </footer>
+
+    <!-- Scroll to top button -->
+    <button class="scroll-to-top" id="scrollToTop">↑</button>
 
     <script src="data/books-data.js"></script>
     <script src="js/script.js"></script>
