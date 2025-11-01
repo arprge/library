@@ -110,7 +110,8 @@ main {
 }
 
 .hero {
-    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('../data/main-bckgrnd.jpg') no-repeat center center;
+    background-size: cover;
     color: var(--light-color);
     padding: 4rem 0;
     text-align: center;
@@ -124,8 +125,11 @@ main {
 
 .hero p {
     font-size: 1.2rem;
-    margin-bottom: 2rem;
-    opacity: 0.9;
+    line-height: 1.7;
+    max-width: 800px;
+    margin: 0 auto 2rem;
+    opacity: 1;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.35);
 }
 
 .hero-buttons {
@@ -160,14 +164,16 @@ main {
 }
 
 .btn-secondary {
-    background-color: transparent;
-    color: var(--light-color);
-    border: 2px solid var(--light-color);
+    background-color: white;
+    color: var(--primary-color);
+    border: 2px solid var(--primary-color);
 }
 
 .btn-secondary:hover {
-    background-color: var(--light-color);
-    color: var(--primary-color);
+    background-color: var(--primary-color);
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-hover);
 }
 
 .btn-small {
@@ -283,11 +289,17 @@ main {
 }
 
 /* search */
+.search-section h1 {
+    color: white;
+}
+
 .search-container {
     display: flex;
     gap: 1rem;
     margin-bottom: 2rem;
     flex-wrap: wrap;
+    background-size: cover;
+    background-position: center;
 }
 
 .search-input {
@@ -557,3 +569,6 @@ footer {
         grid-template-columns: 1fr;
     }
 }
+
+
+/* nu */ 

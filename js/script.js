@@ -1,4 +1,4 @@
-// Управление локальным хранилищем
+// Управление локальным хранилищем (обновлено для API)
 const Storage = {
     getReadBooks: function() {
         const books = localStorage.getItem('readBooks');
@@ -10,23 +10,25 @@ const Storage = {
         return books ? JSON.parse(books) : [];
     },
     
-    addToReadBooks: function(bookId) {
+    addToReadBooks: function(book) {
         const readBooks = this.getReadBooks();
-        if (!readBooks.includes(bookId)) {
-            readBooks.push(bookId);
+        const exists = readBooks.find(b => b.id === book.id);
+        if (!exists) {
+            readBooks.push(book);
             localStorage.setItem('readBooks', JSON.stringify(readBooks));
             
             // Удаляем из планов если была там
-            this.removeFromPlanBooks(bookId);
+            this.removeFromPlanBooks(book.id);
             return true;
         }
         return false;
     },
     
-    addToPlanBooks: function(bookId) {
+    addToPlanBooks: function(book) {
         const planBooks = this.getPlanBooks();
-        if (!planBooks.includes(bookId)) {
-            planBooks.push(bookId);
+        const exists = planBooks.find(b => b.id === book.id);
+        if (!exists) {
+            planBooks.push(book);
             localStorage.setItem('planBooks', JSON.stringify(planBooks));
             return true;
         }
@@ -35,22 +37,22 @@ const Storage = {
     
     removeFromReadBooks: function(bookId) {
         let readBooks = this.getReadBooks();
-        readBooks = readBooks.filter(id => id !== bookId);
+        readBooks = readBooks.filter(b => b.id !== bookId);
         localStorage.setItem('readBooks', JSON.stringify(readBooks));
     },
     
     removeFromPlanBooks: function(bookId) {
         let planBooks = this.getPlanBooks();
-        planBooks = planBooks.filter(id => id !== bookId);
+        planBooks = planBooks.filter(b => b.id !== bookId);
         localStorage.setItem('planBooks', JSON.stringify(planBooks));
     },
     
     isInReadBooks: function(bookId) {
-        return this.getReadBooks().includes(bookId);
+        return this.getReadBooks().some(b => b.id === bookId);
     },
     
     isInPlanBooks: function(bookId) {
-        return this.getPlanBooks().includes(bookId);
+        return this.getPlanBooks().some(b => b.id === bookId);
     }
 };
 
@@ -59,6 +61,7 @@ function createBookCard(book, showActions = true) {
     const card = document.createElement('div');
     card.className = 'book-card';
     
+    const bookIdString = JSON.stringify(book.id).replace(/"/g, '&quot;');
     const isRead = Storage.isInReadBooks(book.id);
     const isInPlan = Storage.isInPlanBooks(book.id);
     
@@ -66,16 +69,24 @@ function createBookCard(book, showActions = true) {
     if (showActions) {
         actionsHTML = `
             <div class="book-actions">
-                ${!isRead ? `<button class="btn btn-primary btn-small" onclick="addToRead(${book.id})">
+                ${!isRead ? `<button class="btn btn-primary btn-small" onclick='addToRead(${bookIdString})'>
                     ${isInPlan ? 'Прочитано ✓' : 'Прочитано'}
                 </button>` : '<button class="btn btn-small" style="background: #4CAF50; color: white;" disabled>Прочитано ✓</button>'}
-                ${!isRead && !isInPlan ? `<button class="btn btn-secondary btn-small" onclick="addToPlan(${book.id})">В планы</button>` : ''}
+                ${!isRead && !isInPlan ? `<button class="btn btn-secondary btn-small" onclick='addToPlan(${bookIdString})'>В планы</button>` : ''}
             </div>
         `;
     }
     
+    // Используем реальную обложку или иконку
+    let coverHTML;
+    if (book.coverUrl) {
+        coverHTML = `<img src="${book.coverUrl}" alt="${book.title}" style="width: 100%; height: 100%; object-fit: cover;" onerror="this.style.display='none'; this.parentElement.innerHTML='${book.icon || '📚'}';">`;
+    } else {
+        coverHTML = book.icon || '📚';
+    }
+    
     card.innerHTML = `
-        <div class="book-cover">${book.icon}</div>
+        <div class="book-cover">${coverHTML}</div>
         <div class="book-info">
             <div class="book-title">${book.title}</div>
             <div class="book-author">${book.author}</div>
@@ -87,10 +98,14 @@ function createBookCard(book, showActions = true) {
     return card;
 }
 
+// Глобальный кэш книг для быстрого доступа
+let booksCache = [];
+
 // Добавление книги в прочитанные
 function addToRead(bookId) {
-    if (Storage.addToReadBooks(bookId)) {
-        showNotification('Книга добавлена в прочитанные!');
+    const book = booksCache.find(b => b.id === bookId);
+    if (book && Storage.addToReadBooks(book)) {
+        showNotification('Кітап тізімге қосылды');
         // Перезагрузка текущей страницы
         if (window.location.pathname.includes('search.html')) {
             performSearch();
@@ -100,28 +115,8 @@ function addToRead(bookId) {
     }
 }
 
-// Добавление книги в планы
-function addToPlan(bookId) {
-    if (Storage.addToPlanBooks(bookId)) {
-        showNotification('Книга добавлена в список желаемого!');
-        // Перезагрузка текущей страницы
-        if (window.location.pathname.includes('search.html')) {
-            performSearch();
-        }
-    }
-}
 
-// Удаление книги из списка
-function removeFromList(bookId, listType) {
-    if (listType === 'read') {
-        Storage.removeFromReadBooks(bookId);
-        showNotification('Книга удалена из прочитанных');
-    } else {
-        Storage.removeFromPlanBooks(bookId);
-        showNotification('Книга удалена из планов');
-    }
-    loadMyBooks();
-}
+
 
 // Уведомления
 function showNotification(message) {
@@ -177,18 +172,23 @@ style.textContent = `
 document.head.appendChild(style);
 
 // === ФУНКЦИИ ДЛЯ ГЛАВНОЙ СТРАНИЦЫ ===
-function displayPopularBooks() {
+//async function displayPopularBooks() {
     const grid = document.getElementById('popularBooksGrid');
     if (!grid) return;
     
-    // Показываем первые 6 книг как популярные
-    const popularBooks = booksDatabase.slice(0, 6);
+    grid.innerHTML = '<div style="grid-column: 1/-1; text-align: center; padding: 2rem;">Загрузка книг...</div>';
     
-    grid.innerHTML = '';
-    popularBooks.forEach(book => {
-        grid.appendChild(createBookCard(book));
-    });
-}
+    try {
+        const popularBooks = await getPopularBooks();
+        booksCache = [...popularBooks]; // Обновляем кэш
+        grid.innerHTML = '';
+        popularBooks.forEach(book => {
+            grid.appendChild(createBookCard(book));
+        });
+    } catch (error) {
+        grid.innerHTML = '<div style="grid-column: 1/-1; text-align: center; padding: 2rem; color: red;">Ошибка загрузки книг</div>';
+    }
+} 
 
 // === ФУНКЦИИ ДЛЯ СТРАНИЦЫ ПОИСКА ===
 function initSearch() {
@@ -196,8 +196,8 @@ function initSearch() {
     const searchBtn = document.getElementById('searchBtn');
     const genreFilter = document.getElementById('genreFilter');
     
-    // Показываем все книги при загрузке
-    displayAllBooks();
+    // Не показываем результаты при загрузке
+    document.getElementById('booksGrid').innerHTML = '<div style="grid-column: 1/-1; text-align: center; padding: 2rem; color: white;">Іздеуді бастау үшін кітаптың атын немесе авторды енгізіңіз.</div>';
     
     // Поиск по клику
     searchBtn.addEventListener('click', performSearch);
@@ -209,43 +209,47 @@ function initSearch() {
         }
     });
     
-    // Фильтр по жанру
-    genreFilter.addEventListener('change', performSearch);
+    // Убираем фильтр по жанру (он не нужен для API поиска)
+    // genreFilter.addEventListener('change', performSearch);
 }
 
-function performSearch() {
+async function performSearch() {
     const searchInput = document.getElementById('searchInput');
-    const genreFilter = document.getElementById('genreFilter');
-    const query = searchInput.value.toLowerCase().trim();
-    const selectedGenre = genreFilter.value;
+    const query = searchInput.value.trim();
     
-    let filteredBooks = booksDatabase;
+    const grid = document.getElementById('booksGrid');
+    const resultsCount = document.getElementById('resultsCount');
+    const noResults = document.getElementById('noResults');
     
-    // Фильтр по жанру
-    if (selectedGenre) {
-        filteredBooks = filteredBooks.filter(book => book.genre === selectedGenre);
+    // Показываем загрузку
+    grid.innerHTML = '<div style="grid-column: 1/-1; text-align: center; padding: 2rem;">Поиск книг...</div>';
+    noResults.style.display = 'none';
+    resultsCount.textContent = '';
+    
+    try {
+        let books;
+        if (!query) {
+            displaySearchResults([]); // Показываем пустые результаты, если запрос пустой
+            return;
+        }
+        books = await searchBooks(query, 30);
+        
+        displaySearchResults(books);
+    } catch (error) {
+        grid.innerHTML = '<div style="grid-column: 1/-1; text-align: center; padding: 2rem; color: red;">Ошибка поиска</div>';
     }
-    
-    // Поиск по тексту
-    if (query) {
-        filteredBooks = filteredBooks.filter(book => 
-            book.title.toLowerCase().includes(query) ||
-            book.author.toLowerCase().includes(query) ||
-            book.genre.toLowerCase().includes(query)
-        );
-    }
-    
-    displaySearchResults(filteredBooks);
 }
 
-function displayAllBooks() {
-    displaySearchResults(booksDatabase);
+async function displayAllBooks() {
+    await performSearch();
 }
 
 function displaySearchResults(books) {
     const grid = document.getElementById('booksGrid');
     const resultsCount = document.getElementById('resultsCount');
     const noResults = document.getElementById('noResults');
+    
+    booksCache = [...books]; // Обновляем кэш
     
     if (books.length === 0) {
         grid.style.display = 'none';
@@ -256,7 +260,7 @@ function displaySearchResults(books) {
     
     grid.style.display = 'grid';
     noResults.style.display = 'none';
-    resultsCount.textContent = `Найдено книг: ${books.length}`;
+    resultsCount.textContent = `Кітаптар: ${books.length}`;
     
     grid.innerHTML = '';
     books.forEach(book => {
@@ -287,18 +291,18 @@ function initMyBooks() {
 }
 
 function loadMyBooks() {
-    const readBookIds = Storage.getReadBooks();
-    const planBookIds = Storage.getPlanBooks();
+    const readBooks = Storage.getReadBooks();
+    const planBooks = Storage.getPlanBooks();
     
     // Обновляем статистику
-    document.getElementById('readCount').textContent = readBookIds.length;
-    document.getElementById('planCount').textContent = planBookIds.length;
+    document.getElementById('readCount').textContent = readBooks.length;
+    document.getElementById('planCount').textContent = planBooks.length;
     
     // Загружаем прочитанные книги
     const readBooksContainer = document.getElementById('readBooks');
     const emptyRead = document.getElementById('emptyRead');
     
-    if (readBookIds.length === 0) {
+    if (readBooks.length === 0) {
         readBooksContainer.style.display = 'none';
         emptyRead.style.display = 'block';
     } else {
@@ -306,23 +310,20 @@ function loadMyBooks() {
         emptyRead.style.display = 'none';
         readBooksContainer.innerHTML = '';
         
-        readBookIds.forEach(bookId => {
-            const book = booksDatabase.find(b => b.id === bookId);
-            if (book) {
-                const card = createBookCard(book, false);
-                const removeBtn = document.createElement('button');
-                removeBtn.className = 'btn btn-secondary btn-small';
-                removeBtn.textContent = 'Удалить';
-                removeBtn.onclick = () => removeFromList(bookId, 'read');
-                
-                const bookInfo = card.querySelector('.book-info');
-                const actions = document.createElement('div');
-                actions.className = 'book-actions';
-                actions.appendChild(removeBtn);
-                bookInfo.appendChild(actions);
-                
-                readBooksContainer.appendChild(card);
-            }
+        readBooks.forEach(book => {
+            const card = createBookCard(book, false);
+            const removeBtn = document.createElement('button');
+            removeBtn.className = 'btn btn-secondary btn-small';
+            removeBtn.textContent = 'Удалить';
+            removeBtn.onclick = () => removeFromList(book.id, 'read');
+            
+            const bookInfo = card.querySelector('.book-info');
+            const actions = document.createElement('div');
+            actions.className = 'book-actions';
+            actions.appendChild(removeBtn);
+            bookInfo.appendChild(actions);
+            
+            readBooksContainer.appendChild(card);
         });
     }
     
@@ -330,7 +331,7 @@ function loadMyBooks() {
     const planBooksContainer = document.getElementById('planBooks');
     const emptyPlan = document.getElementById('emptyPlan');
     
-    if (planBookIds.length === 0) {
+    if (planBooks.length === 0) {
         planBooksContainer.style.display = 'none';
         emptyPlan.style.display = 'block';
     } else {
@@ -338,31 +339,31 @@ function loadMyBooks() {
         emptyPlan.style.display = 'none';
         planBooksContainer.innerHTML = '';
         
-        planBookIds.forEach(bookId => {
-            const book = booksDatabase.find(b => b.id === bookId);
-            if (book) {
-                const card = createBookCard(book, false);
-                const actionsDiv = document.createElement('div');
-                actionsDiv.className = 'book-actions';
-                
-                const readBtn = document.createElement('button');
-                readBtn.className = 'btn btn-primary btn-small';
-                readBtn.textContent = 'Прочитано';
-                readBtn.onclick = () => addToRead(bookId);
-                
-                const removeBtn = document.createElement('button');
-                removeBtn.className = 'btn btn-secondary btn-small';
-                removeBtn.textContent = 'Удалить';
-                removeBtn.onclick = () => removeFromList(bookId, 'plan');
-                
-                actionsDiv.appendChild(readBtn);
-                actionsDiv.appendChild(removeBtn);
-                
-                const bookInfo = card.querySelector('.book-info');
-                bookInfo.appendChild(actionsDiv);
-                
-                planBooksContainer.appendChild(card);
-            }
+        planBooks.forEach(book => {
+            const card = createBookCard(book, false);
+            const actionsDiv = document.createElement('div');
+            actionsDiv.className = 'book-actions';
+            
+            const readBtn = document.createElement('button');
+            readBtn.className = 'btn btn-primary btn-small';
+            readBtn.textContent = 'Прочитано';
+            readBtn.onclick = () => {
+                booksCache = [book]; // Временно добавляем в кэш
+                addToRead(book.id);
+            };
+            
+            const removeBtn = document.createElement('button');
+            removeBtn.className = 'btn btn-secondary btn-small';
+            removeBtn.textContent = 'Удалить';
+            removeBtn.onclick = () => removeFromList(book.id, 'plan');
+            
+            actionsDiv.appendChild(readBtn);
+            actionsDiv.appendChild(removeBtn);
+            
+            const bookInfo = card.querySelector('.book-info');
+            bookInfo.appendChild(actionsDiv);
+            
+            planBooksContainer.appendChild(card);
         });
     }
 }

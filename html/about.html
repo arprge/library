@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="kk">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>О библиотеке - Библиотека</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Кітапхана туралы - Кітапхана</title>
+    <link rel="stylesheet" href="../css/style.css">
     <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
 </head>
 <body>
@@ -12,17 +12,14 @@
         <nav class="navbar">
             <div class="container">
                 <div class="logo">
-                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
-                        <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
-                    </svg>
-                    <span>Моя Библиотека</span>
+                    <img src="../data/image.png" alt="Logo" width="32" height="32">
+                    <span>Менің Кітапханам</span>
                 </div>
                 <ul class="nav-links">
-                    <li><a href="index.html">Главная</a></li>
-                    <li><a href="search.html">Поиск книг</a></li>
-                    <li><a href="my-books.html">Мои книги</a></li>
-                    <li><a href="about.html" class="active">О библиотеке</a></li>
+                    <li><a href="../index.html">Басты</a></li>
+                    <li><a href="search.html">Кітап іздеу</a></li>
+                    <li><a href="my-books.html">Менің кітаптарым</a></li>
+                    <li><a href="about.html" class="active">Кітапхана туралы</a></li>
                 </ul>
             </div>
         </nav>
@@ -31,63 +28,23 @@
     <main>
         <section class="about-section">
             <div class="container">
-                <h1>О библиотеке</h1>
+                <h1>Кітапхана туралы</h1>
                 
                 <div class="about-content">
                     <div class="about-card">
-                        <h2>О проекте</h2>
-                        <p>Данный сайт представляет собой учебный проект для первого курса университета. Целью является создание функционального веб-приложения для управления личной библиотекой книг.</p>
-                        <p>Проект разработан с использованием базовых веб-технологий: HTML5, CSS3 и JavaScript, демонстрируя фундаментальные принципы веб-разработки.</p>
+                        <h2>Жоба туралы</h2>
+                        <p>Бұл сайт кітапхана бойынша кітаптарды іздеп, оқылған кітаптарды, оқуға жоспарланып жатқан және дәл қазір оқып жатқан кітаптардың тізімдерін жүргізуге арналған функционалды веб-қосымшаны құру.</p>
                     </div>
 
                     <div class="about-card">
-                        <h2>Функциональность</h2>
+                        <h2>Функционалы</h2>
                         <ul class="features-list">
-                            <li><strong>Каталог книг:</strong> Просмотр доступной коллекции книг</li>
-                            <li><strong>Поиск и фильтрация:</strong> Быстрый поиск по названию, автору или жанру</li>
-                            <li><strong>Списки чтения:</strong> Управление прочитанными книгами и списком желаемого</li>
-                            <li><strong>Статистика:</strong> Отслеживание количества прочитанных книг</li>
-                            <li><strong>Адаптивный дизайн:</strong> Корректное отображение на различных устройствах</li>
+                            <li><strong>Кітаптар каталогы:</strong> Қолжетімді кітаптар жинағын қарау</li>
+                            <li><strong>Іздеу және сүзгілеу:</strong> Атауы, авторы немесе жанры бойынша тез іздеу</li>
+                            <li><strong>Оқу тізімдері:</strong> Оқылған кітаптарды және тілектер тізімін басқару</li>
+                            <li><strong>Статистика:</strong> Оқылған кітаптар санын бақылау</li>
+                            <li><strong>Бейімделген дизайн:</strong> Әртүрлі құрылғыларда дұрыс көрсету</li>
                         </ul>
-                    </div>
-
-                    <div class="about-card">
-                        <h2>Технологии</h2>
-                        <div class="tech-stack">
-                            <div class="tech-item">
-                                <h3>HTML5</h3>
-                                <p>Структура и семантика страниц</p>
-                            </div>
-                            <div class="tech-item">
-                                <h3>CSS3</h3>
-                                <p>Стилизация и адаптивный дизайн</p>
-                            </div>
-                            <div class="tech-item">
-                                <h3>JavaScript</h3>
-                                <p>Интерактивность и работа с данными</p>
-                            </div>
-                            <div class="tech-item">
-                                <h3>LocalStorage</h3>
-                                <p>Сохранение пользовательских данных</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="about-card">
-                        <h2>Как пользоваться</h2>
-                        <ol class="instructions-list">
-                            <li>Перейдите на страницу <strong>Поиск книг</strong> для просмотра каталога</li>
-                            <li>Используйте поиск и фильтры для нахождения интересующих книг</li>
-                            <li>Добавляйте книги в списки "Прочитано" или "Хочу прочитать"</li>
-                            <li>Просматривайте свои списки на странице <strong>Мои книги</strong></li>
-                            <li>Отслеживайте статистику прочтения</li>
-                        </ol>
-                    </div>
-
-                    <div class="about-card contact-card">
-                        <h2>Контакты</h2>
-                        <p>Это учебный проект, разработанный студентом первого курса.</p>
-                        <p class="year">2024 год</p>
                     </div>
                 </div>
             </div>
@@ -96,11 +53,11 @@
 
     <footer>
         <div class="container">
-            <p>&copy; 2024 Моя Библиотека. Учебный проект.</p>
+            <p>&copy; 2025 Кітапхана. Алжан Алан</p>
         </div>
     </footer>
 
-    <script src="books-data.js"></script>
-    <script src="script.js"></script>
+    <script src="../data/books-data.js"></script>
+    <script src="../js/script.js"></script>
 </body>
 </html>

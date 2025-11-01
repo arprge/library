@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Кітапхана - Басты бет</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/floor-plan.css">
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="container">
+                <div class="logo">
+                    <img src="data/image.png" alt="Logo" width="32" height="32">
+                    <span>Менің Кітапханам</span>
+                </div>
+                <ul class="nav-links">
+                    <li><a href="index.html" class="active">Басты</a></li>
+                    <li><a href="html/search.html">Кітап іздеу</a></li>
+                    <li><a href="html/my-books.html">Менің кітаптарым</a></li>
+                    <li><a href="html/about.html">Кітапхана туралы</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero">
+            <div class="container">
+                <h1>Алатау қаласының кітапханасына қош келдіңіз</h1>
+                <p>Оқып жатқан кітаптарыңызды басқарыңыз <br> Оқуға жоспарлап жатқан кітаптарыңызды тізімдеңіз <br> Кітаптардан өзіңізге керек жазбалардың тізімін жүргізіңіз </p>
+                <div class="hero-buttons">
+                    <a href="html/search.html" class="btn btn-primary">Кітап іздеу</a>
+                    <a href="html/my-books.html" class="btn btn-secondary">Менің тізімдерім</a>
+                </div>
+            </div>
+        </section>
+
+
+        <!--
+        <section class="popular-books">
+            <div class="container">
+                <h2>Танымал кітаптар</h2>
+                <div id="popularBooksGrid" class="books-grid">
+                </div>
+            </div>
+        </section>
+        -->
+
+
+
+        <!-- From nu-->
+
+<section class="library-hours" style="background-color:#eaebec; padding:60px 0;">
+    <div class="container">
+        <h2 style="color: rgb(43, 116, 189); font-size:36px; font-family:'Merriweather', serif;">See hours and locations</h2>
+        <table class="s-lc-w-today" style="width:100%; margin-top:20px;">
+            <caption class="s-lc-w-sr-only">Display of Opening hours</caption>
+            <thead>
+                <tr>
+                    <th colspan="2">
+                        <button class="s-lc-w-btn s-lc-w-next" data-date="2025-10-29">Next Day</button>
+                        <span class="s-lc-w-head-pre">Hours<br></span>
+                        <span>Tuesday, October 28, 2025</span>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Main Library</td>
+                    <td><span class="s-lc-time">8:30am – 7:45pm</span></td>
+                </tr>
+                <tr>
+                    <td>NUSoM Library</td>
+                    <td><span class="s-lc-time">8:30am – 7:45pm</span></td>
+                </tr>
+                <tr>
+                    <td>Booking Hours</td>
+                    <td><span class="s-lc-time">9:00am – 7:00pm</span></td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="s-lc-w-today-view-all" style="margin-top:10px;">
+            <a href="https://nu-kz.libcal.com/hours/" class="s-lc-w-today-view-link">View all Hours</a>
+        </div>
+    </div>
+</section>
+
+
+<!--Map-->
+        <section class="floor-plan-section">
+            <div class="container">
+                <div class="floor-plan-container">
+                    <h2>Кітапхана жоспары</h2>
+                    <p class="instruction">Кітапхананың әртүрлі аймақтары туралы толық ақпарат алу үшін картадағы аймақтарды басыңыз</p>
+                    
+                    <img src="data/library-floor-plan.png" usemap="#image-map" alt="Кітапхана жоспары">
+
+                    <map name="image-map">
+                        <area target="" alt="Уборная (М)" title="Уборная (М)" href="#" coords="181,596,12,444" shape="rect" onclick="openModal('modal1'); return false;">
+                        <area target="" alt="Читательский зал" title="Читательский зал" href="#" coords="486,439,14,154" shape="rect" onclick="openModal('modal2'); return false;">
+                        <area target="" alt="Коворкинг пространство" title="Коворкинг пространство" href="#" coords="898,451,501,12" shape="rect" onclick="openModal('modal3'); return false;">
+                        <area target="" alt="Уборная (Ж)" title="Уборная (Ж)" href="#" coords="738,454,903,599" shape="rect" onclick="openModal('modal4'); return false;">
+                        <area target="" alt="Прихожая" title="Прихожая" href="#" coords="186,442,736,608" shape="rect" onclick="openModal('modal5'); return false;">
+                        <area target="" alt="Регистратура и стойка выдачи" title="Регистратура и стойка выдачи" href="#" coords="10,11,492,154" shape="rect" onclick="openModal('modal6'); return false;">
+                    </map>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Кітапхана. Алжан Алан</p>
+        </div>
+    </footer>
+
+    <script src="data/books-data.js"></script>
+    <script src="js/script.js"></script>
+    <script src="js/floor-plan.js"></script>
+    <script>
+        // Загрузка популярных книг на главную страницу
+        document.addEventListener('DOMContentLoaded', () => {
+            displayPopularBooks();
+        });
+    </script>
+    <!-- Модальные окна для каждой зоны -->
+    
+    <!-- Уборная (М) -->
+    <div id="modal1" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('modal1')">&times;</span>
+            <h2>Дәретхана (Ер)</h2>
+            <div class="modal-image">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M12 2a5 5 0 0 0-5 5v2H5v13h7V9H8V7a4 4 0 1 1 8 0v2h-4v13h7V9h-2V7a5 5 0 0 0-5-5z"/>
+                </svg>
+            </div>
+            <p>Ер адамдарға арналған дәретхана кітапхананың сол жақ бұрышында орналасқан.</p>
+            <div class="modal-features">
+                <strong>Мүмкіндіктер:</strong>
+                <ul>
+                    <li>Заманауи сантехника</li>
+                    <li>Тазалық пен гигиена</li>
+                    <li>Мүгедектерге қолжетімділік</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- Читательский зал -->
+    <div id="modal2" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('modal2')">&times;</span>
+            <h2>Оқу залы</h2>
+            <div class="modal-image">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/>
+                    <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
+                </svg>
+            </div>
+            <p>Оқу залы - кітапханың негізгі аймағы, мұнда келушілер тыныш ортада кітап оқи алады.</p>
+            <div class="modal-features">
+                <strong>Мүмкіндіктер:</strong>
+                <ul>
+                    <li>Жайлы оқу үстелдері мен орындықтар</li>
+                    <li>Жақсы жарық беру</li>
+                    <li>Тыныш оқу орталары</li>
+                    <li>Кітаптарға тікелей қолжетімділік</li>
+                    <li>Wi-Fi интернет байланысы</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- Коворкинг пространство -->
+    <div id="modal3" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('modal3')">&times;</span>
+            <h2>Коворкинг кеңістігі</h2>
+            <div class="modal-image">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                    <circle cx="9" cy="7" r="4"/>
+                    <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+                    <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+                </svg>
+            </div>
+            <p>Топтық жұмыс пен ынтымақтастыққа арналған заманауи кеңістік.</p>
+            <div class="modal-features">
+                <strong>Мүмкіндіктер:</strong>
+                <ul>
+                    <li>Топтық жұмыс үстелдері</li>
+                    <li>Презентациялық жабдықтар</li>
+                    <li>Ақша тақта мен флипчарттар</li>
+                    <li>Жоғары жылдамдықты интернет</li>
+                    <li>Розеткалар және USB порттары</li>
+                    <li>Кофе-машина және су диспенсері</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- Уборная (Ж) -->
+    <div id="modal4" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('modal4')">&times;</span>
+            <h2>Дәретхана (Әйел)</h2>
+            <div class="modal-image">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="5" r="3"/>
+                    <path d="M12 8v8m-4 0l4-4 4 4M8 20h8"/>
+                </svg>
+            </div>
+            <p>Әйелдерге арналған дәретхана кітапхананың оң жақ бұрышында орналасқан.</p>
+            <div class="modal-features">
+                <strong>Мүмкіндіктер:</strong>
+                <ul>
+                    <li>Заманауи сантехника</li>
+                    <li>Тазалық пен гигиена</li>
+                    <li>Мүгедектерге қолжетімділік</li>
+                    <li>Балаларға арналған орын</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- Прихожая -->
+    <div id="modal5" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('modal5')">&times;</span>
+            <h2>Кіреберіс</h2>
+            <div class="modal-image">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+                    <polyline points="9 22 9 12 15 12 15 22"/>
+                </svg>
+            </div>
+            <p>Кітапхананың негізгі кіреберісі мен қабылдау аймағы. Келушілерді қарсы алу орны.</p>
+            <div class="modal-features">
+                <strong>Мүмкіндіктер:</strong>
+                <ul>
+                    <li>Кең кіреберіс есігі</li>
+                    <li>Ақпараттық стенд</li>
+                    <li>Сыртқы киімдерге арналған шкафтар</li>
+                    <li>Күзет қызметі</li>
+                    <li>Қауіпсіздік жүйесі</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- Регистратура и стойка выдачи -->
+    <div id="modal6" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('modal6')">&times;</span>
+            <h2>Тіркеу және беру үстелі
+            </h2>
+            <div class="modal-image">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                    <polyline points="14 2 14 8 20 8"/>
+                    <line x1="16" y1="13" x2="8" y2="13"/>
+                    <line x1="16" y1="17" x2="8" y2="17"/>
+                    <polyline points="10 9 9 9 8 9"/>
+                </svg>
+            </div>
+            <p>Кітаптарды тіркеу, беру және қайтару жүргізілетін негізгі қызмет аймағы.</p>
+            <div class="modal-features">
+                <strong>Қызметтер:</strong>
+                <ul>
+                    <li>Кітапханаға тіркелу</li>
+                    <li>Кітаптарды алу және қайтару</li>
+                    <li>Кітап іздеуге көмек</li>
+                    <li>Ақпараттық консультация</li>
+                    <li>Қарыздарды төлеу</li>
+                    <li>Кітапханалық карталарды ресімдеу</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
