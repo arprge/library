@@ -1,28 +1,43 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="kk">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Поиск книг - Библиотека</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Кітап іздеу - Кітапхана</title>
+    <link rel="stylesheet" href="../css/style.css">
     <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background-image: linear-gradient(rgba(30, 23, 13, 0.45), rgba(30, 23, 13, 0.45)), url('https://i.ibb.co.com/d0PnjjcG/stacks.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            background-repeat: no-repeat;
+            position: relative;
+        }
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            z-index: -1;
+            backdrop-filter: blur(6px);
+            -webkit-backdrop-filter: blur(6px);
+        }
+    </style>
 </head>
 <body>
     <header>
         <nav class="navbar">
             <div class="container">
                 <div class="logo">
-                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
-                        <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
-                    </svg>
-                    <span>Моя Библиотека</span>
+                    <img src="../data/image.png" alt="Logo" width="32" height="32">
+                    <span>Менің Кітапханам</span>
                 </div>
                 <ul class="nav-links">
-                    <li><a href="index.html">Главная</a></li>
-                    <li><a href="search.html" class="active">Поиск книг</a></li>
-                    <li><a href="my-books.html">Мои книги</a></li>
-                    <li><a href="about.html">О библиотеке</a></li>
+                    <li><a href="../index.html">Басты</a></li>
+                    <li><a href="search.html" class="active">Кітап іздеу</a></li>
+                    <li><a href="my-books.html">Менің кітаптарым</a></li>
+                    <li><a href="about.html">Кітапхана туралы</a></li>
                 </ul>
             </div>
         </nav>
@@ -31,19 +46,19 @@
     <main>
         <section class="search-section">
             <div class="container">
-                <h1>Поиск книг</h1>
+                <h1>Кітап іздеу</h1>
                 
                 <div class="search-container">
-                    <input type="text" id="searchInput" class="search-input" placeholder="Введите название книги, автора или жанр...">
-                    <button id="searchBtn" class="btn btn-primary">Поиск</button>
+                    <input type="text" id="searchInput" class="search-input" placeholder="Кітап атын, авторын немесе жанрын енгізіңіз...">
+                    <button id="searchBtn" class="btn btn-primary">Іздеу</button>
                 </div>
 
                 <div class="filters">
-                    <h3>Фильтры</h3>
+                    <h3>Сүзгілер</h3>
                     <div class="filter-group">
                         <label for="genreFilter">Жанр:</label>
                         <select id="genreFilter" class="filter-select">
-                            <option value="">Все жанры</option>
+                            <option value="">Барлық жанрлар</option>
                             <option value="Классика">Классика</option>
                             <option value="Фантастика">Фантастика</option>
                             <option value="Детектив">Детектив</option>
@@ -60,7 +75,7 @@
                         <!-- Результаты поиска будут отображаться здесь -->
                     </div>
                     <div id="noResults" class="no-results" style="display: none;">
-                        <p>Книги не найдены. Попробуйте изменить параметры поиска.</p>
+                        <p>Кітаптар табылмады. Іздеу параметрлерін өзгертіп көріңіз.</p>
                     </div>
                 </div>
             </div>
@@ -69,12 +84,12 @@
 
     <footer>
         <div class="container">
-            <p>&copy; 2024 Моя Библиотека. Учебный проект.</p>
+            <p>&copy; Кітапхана. Алжан Алан.</p>
         </div>
     </footer>
 
-    <script src="books-data.js"></script>
-    <script src="script.js"></script>
+    <script src="../data/books-data.js"></script>
+    <script src="../js/script.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             initSearch();
