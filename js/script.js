@@ -172,7 +172,7 @@ style.textContent = `
 document.head.appendChild(style);
 
 // === ФУНКЦИИ ДЛЯ ГЛАВНОЙ СТРАНИЦЫ ===
-//async function displayPopularBooks() {
+/*async function displayPopularBooks() {
     const grid = document.getElementById('popularBooksGrid');
     if (!grid) return;
     
@@ -188,7 +188,7 @@ document.head.appendChild(style);
     } catch (error) {
         grid.innerHTML = '<div style="grid-column: 1/-1; text-align: center; padding: 2rem; color: red;">Ошибка загрузки книг</div>';
     }
-} 
+} */
 
 // === ФУНКЦИИ ДЛЯ СТРАНИЦЫ ПОИСКА ===
 function initSearch() {
