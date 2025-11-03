@@ -17,7 +17,7 @@ const Storage = {
             readBooks.push(book);
             localStorage.setItem('readBooks', JSON.stringify(readBooks));
             
-            // Удаляем из планов если была там
+            // Удаляем из планов 
             this.removeFromPlanBooks(book.id);
             return true;
         }
@@ -56,7 +56,7 @@ const Storage = {
     }
 };
 
-// Создание карточки книги
+// Создание карточки книггггиии
 function createBookCard(book, showActions = true) {
     const card = document.createElement('div');
     card.className = 'book-card';

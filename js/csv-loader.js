@@ -47,22 +47,31 @@ function cleanTitle(title) {
 }
 
 // Определение жанра
+const genreRules = [
+    { genre: 'Фантастика', keywords: { title: ['harry potter', 'wizard', 'lord of the rings', 'hobbit', 'dune', 'space', 'hitchhiker'] } },
+    { genre: 'Классика', keywords: { author: ['tolstoy', 'dostoyevsky', 'hemingway', 'fitzgerald'] } },
+    { genre: 'Детектив', keywords: { title: ['mystery', 'detective'] } },
+    { genre: 'Роман', keywords: { title: ['love', 'heart'] } },
+    { genre: 'История', keywords: { title: ['history', 'war'] } },
+    { genre: 'Приключения', keywords: { title: ['adventure', 'treasure'] } },
+    { genre: 'Путешествия', keywords: { author: ['bryson'] } },
+    { genre: 'Философия', keywords: { title: ['philosophy', 'thinking'] } }
+];
+
 function detectGenre(title, author) {
     const titleLower = title.toLowerCase();
     const authorLower = author.toLowerCase();
-    
-    if (titleLower.includes('harry potter') || titleLower.includes('wizard')) return 'Фантастика';
-    if (titleLower.includes('lord of the rings') || titleLower.includes('hobbit')) return 'Фантастика';
-    if (titleLower.includes('dune') || titleLower.includes('space')) return 'Фантастика';
-    if (titleLower.includes('hitchhiker')) return 'Фантастика';
-    if (authorLower.includes('tolstoy') || authorLower.includes('dostoyevsky')) return 'Классика';
-    if (authorLower.includes('hemingway') || authorLower.includes('fitzgerald')) return 'Классика';
-    if (titleLower.includes('mystery') || titleLower.includes('detective')) return 'Детектив';
-    if (titleLower.includes('love') || titleLower.includes('heart')) return 'Роман';
-    if (titleLower.includes('history') || titleLower.includes('war')) return 'История';
-    if (titleLower.includes('adventure') || titleLower.includes('treasure')) return 'Приключения';
-    if (authorLower.includes('bryson')) return 'Путешествия';
-    if (titleLower.includes('philosophy') || titleLower.includes('thinking')) return 'Философия';
+
+    for (const rule of genreRules) {
+        const { title: titleKeywords, author: authorKeywords } = rule.keywords;
+
+        if (titleKeywords && titleKeywords.some(keyword => titleLower.includes(keyword))) {
+            return rule.genre;
+        }
+        if (authorKeywords && authorKeywords.some(keyword => authorLower.includes(keyword))) {
+            return rule.genre;
+        }
+    }
     
     return 'Роман'; // По умолчанию
 }
