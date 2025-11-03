@@ -70,9 +70,9 @@ function createBookCard(book, showActions = true) {
         actionsHTML = `
             <div class="book-actions">
                 ${!isRead ? `<button class="btn btn-primary btn-small" onclick='addToRead(${bookIdString})'>
-                    ${isInPlan ? 'Прочитано ✓' : 'Прочитано'}
-                </button>` : '<button class="btn btn-small" style="background: #4CAF50; color: white;" disabled>Прочитано ✓</button>'}
-                ${!isRead && !isInPlan ? `<button class="btn btn-secondary btn-small" onclick='addToPlan(${bookIdString})'>В планы</button>` : ''}
+                    ${isInPlan ? 'Оқылды ✓' : 'Оқылды'}
+                </button>` : '<button class="btn btn-small" style="background: #4CAF50; color: white;" disabled>Оқылды ✓</button>'}
+                ${!isRead && !isInPlan ? `<button class="btn btn-secondary btn-small" onclick='addToPlan(${bookIdString})'>Жоспарға</button>` : ''}
             </div>
         `;
     }
@@ -115,8 +115,31 @@ function addToRead(bookId) {
     }
 }
 
+function addToPlan(bookId) {
+    const book = booksCache.find(b => b.id === bookId);
+    if (book && Storage.addToPlanBooks(book)) {
+        showNotification('Кітап жоспарға қосылды');
+        if (window.location.pathname.includes('search.html')) {
+            performSearch();
+        } else if (window.location.pathname.includes('my-books.html')) {
+            loadMyBooks();
+        }
+    }
+}
 
-
+function removeFromList(bookId, listType) {
+    if (listType === 'read') {
+        Storage.removeFromReadBooks(bookId);
+    } else if (listType === 'plan') {
+        Storage.removeFromPlanBooks(bookId);
+    }
+    showNotification('Кітап тізімнен жойылды');
+    if (window.location.pathname.includes('my-books.html')) {
+        loadMyBooks();
+    } else if (window.location.pathname.includes('search.html')) {
+        performSearch();
+    }
+}
 
 // Уведомления
 function showNotification(message) {
@@ -222,7 +245,7 @@ async function performSearch() {
     const noResults = document.getElementById('noResults');
     
     // Показываем загрузку
-    grid.innerHTML = '<div style="grid-column: 1/-1; text-align: center; padding: 2rem;">Поиск книг...</div>';
+    grid.innerHTML = '<div style="grid-column: 1/-1; text-align: center; padding: 2rem;">Кітаптарды іздеу...</div>';
     noResults.style.display = 'none';
     resultsCount.textContent = '';
     
@@ -236,7 +259,7 @@ async function performSearch() {
         
         displaySearchResults(books);
     } catch (error) {
-        grid.innerHTML = '<div style="grid-column: 1/-1; text-align: center; padding: 2rem; color: red;">Ошибка поиска</div>';
+        grid.innerHTML = '<div style="grid-column: 1/-1; text-align: center; padding: 2rem; color: red;">Іздеу қатесі</div>';
     }
 }
 
@@ -314,7 +337,7 @@ function loadMyBooks() {
             const card = createBookCard(book, false);
             const removeBtn = document.createElement('button');
             removeBtn.className = 'btn btn-secondary btn-small';
-            removeBtn.textContent = 'Удалить';
+            removeBtn.textContent = 'Жою';
             removeBtn.onclick = () => removeFromList(book.id, 'read');
             
             const bookInfo = card.querySelector('.book-info');
@@ -346,7 +369,7 @@ function loadMyBooks() {
             
             const readBtn = document.createElement('button');
             readBtn.className = 'btn btn-primary btn-small';
-            readBtn.textContent = 'Прочитано';
+            readBtn.textContent = 'Оқылды';
             readBtn.onclick = () => {
                 booksCache = [book]; // Временно добавляем в кэш
                 addToRead(book.id);
@@ -354,7 +377,7 @@ function loadMyBooks() {
             
             const removeBtn = document.createElement('button');
             removeBtn.className = 'btn btn-secondary btn-small';
-            removeBtn.textContent = 'Удалить';
+            removeBtn.textContent = 'Жою';
             removeBtn.onclick = () => removeFromList(book.id, 'plan');
             
             actionsDiv.appendChild(readBtn);

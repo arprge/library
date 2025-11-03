@@ -1,1 +1,11 @@
+# Data files
 books.csv
+
+# OS files
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# IDE
+.vscode/
+.idea/

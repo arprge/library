@@ -4,19 +4,56 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Менің кітаптарым - Кітапхана</title>
-    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="assets/css/style.css">
     <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        .my-books-section {
+            background: linear-gradient(to bottom, var(--bg-color), rgba(250, 244, 232, 0.5));
+            min-height: 80vh;
+        }
+        .stats-container {
+            animation: slideInUp 0.8s ease-out;
+        }
+        @keyframes slideInUp {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        .stat-card {
+            position: relative;
+            overflow: hidden;
+        }
+        .stat-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.1), transparent);
+            transform: rotate(45deg);
+            transition: all 0.6s;
+        }
+        .stat-card:hover::before {
+            left: 100%;
+        }
+    </style>
 </head>
 <body>
     <header>
         <nav class="navbar">
             <div class="container">
                 <div class="logo">
-                    <img src="../data/image.png" alt="Logo" width="32" height="32">
+                    <img src="assets/images/image.png" alt="Logo" width="32" height="32">
                     <span>Менің Кітапханам</span>
                 </div>
                 <ul class="nav-links">
-                    <li><a href="../index.html">Басты</a></li>
+                    <li><a href="index.html">Басты</a></li>
                     <li><a href="search.html">Кітап іздеу</a></li>
                     <li><a href="my-books.html" class="active">Менің кітаптарым</a></li>
                     <li><a href="about.html">Кітапхана туралы</a></li>
@@ -77,8 +114,8 @@
         </div>
     </footer>
 
-    <script src="../data/books-data.js"></script>
-    <script src="../js/script.js"></script>
+    <script src="assets/data/books-data.js"></script>
+    <script src="assets/js/script.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             initMyBooks();

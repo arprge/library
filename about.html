@@ -4,19 +4,83 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Кітапхана туралы - Кітапхана</title>
-    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="assets/css/style.css">
     <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        .about-section {
+            background: linear-gradient(135deg, rgba(139, 69, 19, 0.05), rgba(210, 105, 30, 0.08));
+            position: relative;
+            overflow: hidden;
+        }
+        .about-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -10%;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(205, 133, 63, 0.1) 0%, transparent 70%);
+            border-radius: 50%;
+            z-index: 0;
+        }
+        .about-section::after {
+            content: '';
+            position: absolute;
+            bottom: -30%;
+            left: -5%;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(139, 69, 19, 0.08) 0%, transparent 70%);
+            border-radius: 50%;
+            z-index: 0;
+        }
+        .about-section .container {
+            position: relative;
+            z-index: 1;
+        }
+        .about-card {
+            backdrop-filter: blur(10px);
+            background: rgba(255, 255, 255, 0.95) !important;
+            transition: all 0.4s ease;
+        }
+        .about-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 12px 24px rgba(139, 69, 19, 0.2);
+        }
+        .about-section h1 {
+            text-align: center;
+            font-size: 3rem;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 3rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+        .features-list li {
+            padding: 0.5rem 0;
+            border-bottom: 1px solid var(--border-color);
+            transition: all 0.3s ease;
+        }
+        .features-list li:last-child {
+            border-bottom: none;
+        }
+        .features-list li:hover {
+            padding-left: 1rem;
+            color: var(--primary-color);
+        }
+    </style>
 </head>
 <body>
     <header>
         <nav class="navbar">
             <div class="container">
                 <div class="logo">
-                    <img src="../data/image.png" alt="Logo" width="32" height="32">
+                    <img src="assets/images/image.png" alt="Logo" width="32" height="32">
                     <span>Менің Кітапханам</span>
                 </div>
                 <ul class="nav-links">
-                    <li><a href="../index.html">Басты</a></li>
+                    <li><a href="index.html">Басты</a></li>
                     <li><a href="search.html">Кітап іздеу</a></li>
                     <li><a href="my-books.html">Менің кітаптарым</a></li>
                     <li><a href="about.html" class="active">Кітапхана туралы</a></li>
@@ -57,7 +121,7 @@
         </div>
     </footer>
 
-    <script src="../data/books-data.js"></script>
-    <script src="../js/script.js"></script>
+    <script src="assets/data/books-data.js"></script>
+    <script src="assets/js/script.js"></script>
 </body>
 </html>

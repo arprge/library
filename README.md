@@ -1,5 +1,37 @@
-Just another uni project
+# Library Management System
 
-Library website with letterboxd/MAL-like functionality (scores, plan to read/reading/finished) and also uniqur features such as:
-- Personal notes storage for each book
-- //
+University project for library book management with reading lists functionality.
+
+## Features
+
+- Book catalog browsing
+- Search by title, author, or genre
+- Track read/plan-to-read books
+- Library schedule and floor plan
+- Responsive design
+
+## Structure
+
+```
+library/
+├── assets/
+│   ├── css/        # Stylesheets
+│   ├── js/         # JavaScript
+│   ├── images/     # Images
+│   └── data/       # Book data
+├── index.html
+├── about.html
+├── search.html
+└── my-books.html
+```
+
+## Usage
+
+Open `index.html` in your browser.
+
+## Tech Stack
+
+- HTML5, CSS3, JavaScript
+- Local Storage for data persistence
+
+**Алжан Алан** - 2025
