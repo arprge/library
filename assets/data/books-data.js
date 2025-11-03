@@ -18,10 +18,10 @@ async function searchBooks(query, limit = 30) {
         
         return data.docs.map((book, index) => ({
             id: book.key || index,
-            title: book.title || 'Без названия',
-            author: book.author_name ? book.author_name.join(', ') : 'Автор неизвестен',
-            genre: book.subject ? book.subject[0] : 'Разное',
-            year: book.first_publish_year || 'N/A',
+            title: book.title || 'Атаусыз',
+            author: book.author_name ? book.author_name.join(', ') : 'Автор белгісіз',
+            genre: book.subject ? book.subject[0] : 'Әртүрлі',
+            year: book.first_publish_year || '—',
             isbn: book.isbn ? book.isbn[0] : null,
             coverUrl: book.cover_i ? getCoverUrl(book.cover_i) : null,
             icon: book.cover_i ? null : '📚'
@@ -41,10 +41,10 @@ async function searchByAuthor(author, limit = 30) {
         
         return data.docs.map((book, index) => ({
             id: book.key || index,
-            title: book.title || 'Без названия',
+            title: book.title || 'Атаусыз',
             author: book.author_name ? book.author_name.join(', ') : author,
-            genre: book.subject ? book.subject[0] : 'Разное',
-            year: book.first_publish_year || 'N/A',
+            genre: book.subject ? book.subject[0] : 'Әртүрлі',
+            year: book.first_publish_year || '—',
             isbn: book.isbn ? book.isbn[0] : null,
             coverUrl: book.cover_i ? getCoverUrl(book.cover_i) : null,
             icon: book.cover_i ? null : '📚'
@@ -64,10 +64,10 @@ async function searchByTitle(title, limit = 30) {
         
         return data.docs.map((book, index) => ({
             id: book.key || index,
-            title: book.title || 'Без названия',
-            author: book.author_name ? book.author_name.join(', ') : 'Автор неизвестен',
-            genre: book.subject ? book.subject[0] : 'Разное',
-            year: book.first_publish_year || 'N/A',
+            title: book.title || 'Атаусыз',
+            author: book.author_name ? book.author_name.join(', ') : 'Автор белгісіз',
+            genre: book.subject ? book.subject[0] : 'Әртүрлі',
+            year: book.first_publish_year || '—',
             isbn: book.isbn ? book.isbn[0] : null,
             coverUrl: book.cover_i ? getCoverUrl(book.cover_i) : null,
             icon: book.cover_i ? null : '📚'

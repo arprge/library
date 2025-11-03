@@ -4,23 +4,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Кітапхана - Басты бет</title>
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="assets/css/style.css">
     <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="css/floor-plan.css">
+    <link rel="stylesheet" href="assets/css/floor-plan.css">
 </head>
 <body>
     <header>
         <nav class="navbar">
             <div class="container">
                 <div class="logo">
-                    <img src="data/image.png" alt="Logo" width="32" height="32">
+                    <img src="assets/images/image.png" alt="Logo" width="32" height="32">
                     <span>Менің Кітапханам</span>
                 </div>
                 <ul class="nav-links">
                     <li><a href="index.html" class="active">Басты</a></li>
-                    <li><a href="html/search.html">Кітап іздеу</a></li>
-                    <li><a href="html/my-books.html">Менің кітаптарым</a></li>
-                    <li><a href="html/about.html">Кітапхана туралы</a></li>
+                    <li><a href="search.html">Кітап іздеу</a></li>
+                    <li><a href="my-books.html">Менің кітаптарым</a></li>
+                    <li><a href="about.html">Кітапхана туралы</a></li>
                 </ul>
             </div>
         </nav>
@@ -32,8 +32,8 @@
                 <h1>Алатау қаласының кітапханасына қош келдіңіз</h1>
                 <p>Оқып жатқан кітаптарыңызды басқарыңыз <br> Оқуға жоспарлап жатқан кітаптарыңызды тізімдеңіз <br> Кітаптардан өзіңізге керек жазбалардың тізімін жүргізіңіз </p>
                 <div class="hero-buttons">
-                    <a href="html/search.html" class="btn btn-primary">Кітап іздеу</a>
-                    <a href="html/my-books.html" class="btn btn-secondary">Менің тізімдерім</a>
+                    <a href="search.html" class="btn btn-primary">Кітап іздеу</a>
+                    <a href="my-books.html" class="btn btn-secondary">Менің тізімдерім</a>
                 </div>
             </div>
         </section>
@@ -133,15 +133,15 @@
                     <h2>Кітапхана жоспары</h2>
                     <p class="instruction">Кітапхананың әртүрлі аймақтары туралы толық ақпарат алу үшін картадағы аймақтарды басыңыз</p>
                     
-                    <img src="data/library-floor-plan.png" usemap="#image-map" alt="Кітапхана жоспары">
+                    <img src="assets/images/library-floor-plan.png" usemap="#image-map" alt="Кітапхана жоспары">
 
                     <map name="image-map">
-                        <area target="" alt="Уборная (М)" title="Уборная (М)" href="#" coords="181,596,12,444" shape="rect" onclick="openModal('modal1'); return false;">
-                        <area target="" alt="Читательский зал" title="Читательский зал" href="#" coords="486,439,14,154" shape="rect" onclick="openModal('modal2'); return false;">
-                        <area target="" alt="Коворкинг пространство" title="Коворкинг пространство" href="#" coords="898,451,501,12" shape="rect" onclick="openModal('modal3'); return false;">
-                        <area target="" alt="Уборная (Ж)" title="Уборная (Ж)" href="#" coords="738,454,903,599" shape="rect" onclick="openModal('modal4'); return false;">
-                        <area target="" alt="Прихожая" title="Прихожая" href="#" coords="186,442,736,608" shape="rect" onclick="openModal('modal5'); return false;">
-                        <area target="" alt="Регистратура и стойка выдачи" title="Регистратура и стойка выдачи" href="#" coords="10,11,492,154" shape="rect" onclick="openModal('modal6'); return false;">
+                        <area target="" alt="Дәретхана (Ер)" title="Дәретхана (Ер)" aria-label="Дәретхана (Ер)" href="#" coords="181,596,12,444" shape="rect" onclick="openModal('modal1'); return false;">
+                        <area target="" alt="Оқу залы" title="Оқу залы" aria-label="Оқу залы" href="#" coords="486,439,14,154" shape="rect" onclick="openModal('modal2'); return false;">
+                        <area target="" alt="Коворкинг кеңістігі" title="Коворкинг кеңістігі" aria-label="Коворкинг кеңістігі" href="#" coords="898,451,501,12" shape="rect" onclick="openModal('modal3'); return false;">
+                        <area target="" alt="Дәретхана (Әйел)" title="Дәретхана (Әйел)" aria-label="Дәретхана (Әйел)" href="#" coords="738,454,903,599" shape="rect" onclick="openModal('modal4'); return false;">
+                        <area target="" alt="Кіреберіс" title="Кіреберіс" aria-label="Кіреберіс" href="#" coords="186,442,736,608" shape="rect" onclick="openModal('modal5'); return false;">
+                        <area target="" alt="Тіркеу және беру үстелі" title="Тіркеу және беру үстелі" aria-label="Тіркеу және беру үстелі" href="#" coords="10,11,492,154" shape="rect" onclick="openModal('modal6'); return false;">
                     </map>
                 </div>
             </div>
@@ -155,19 +155,11 @@
     </footer>
 
     <!-- Scroll to top button -->
-    <button class="scroll-to-top" id="scrollToTop">↑</button>
+    <button class="scroll-to-top" id="scrollToTop" aria-label="Жоғарыға оралу">↑</button>
 
-    <script src="data/books-data.js"></script>
-    <script src="js/script.js"></script>
-    <script src="js/floor-plan.js"></script>
-    <script>
-        // Загрузка популярных книг на главную страницу
-        document.addEventListener('DOMContentLoaded', () => {
-            displayPopularBooks();
-        });
-    </script>
-    <!-- Модальные окна для каждой зоны -->
-    
+    <script src="assets/data/books-data.js"></script>
+    <script src="assets/js/script.js"></script>
+    <script src="assets/js/floor-plan.js"></script>
     <!-- Уборная (М) -->
     <div id="modal1" class="modal">
         <div class="modal-content">
