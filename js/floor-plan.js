@@ -38,3 +38,35 @@ document.addEventListener('keydown', function(event) {
         }
     }
 });
+
+// Scroll to top button
+const scrollButton = document.getElementById('scrollToTop');
+
+if (scrollButton) {
+    window.addEventListener('scroll', function() {
+        if (window.scrollY > 300) {
+            scrollButton.classList.add('visible');
+        } else {
+            scrollButton.classList.remove('visible');
+        }
+    });
+
+    scrollButton.addEventListener('click', function() {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+    });
+}
+
+// Navbar scroll effect
+const navbar = document.querySelector('.navbar');
+if (navbar) {
+    window.addEventListener('scroll', function() {
+        if (window.scrollY > 50) {
+            navbar.classList.add('scrolled');
+        } else {
+            navbar.classList.remove('scrolled');
+        }
+    });
+}

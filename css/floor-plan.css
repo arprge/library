@@ -13,6 +13,12 @@
     height: auto;
     border: 2px solid var(--border-color);
     border-radius: 8px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.floor-plan-container img:hover {
+    transform: scale(1.02);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
 }
 
 .floor-plan-container h2 {
@@ -131,8 +137,13 @@
 
 area {
     cursor: pointer;
+    transition: all 0.3s ease;
 }
 
 area:hover {
-    opacity: 0.8;
+    filter: brightness(1.2);
+}
+
+area:active {
+    filter: brightness(0.9);
 }
