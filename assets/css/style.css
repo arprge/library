@@ -117,6 +117,18 @@ main {
     color: var(--light-color);
     padding: 4rem 0;
     text-align: center;
+    animation: fadeIn 1s ease-in;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 .hero h1 {
@@ -139,6 +151,7 @@ main {
     gap: 1rem;
     justify-content: center;
     flex-wrap: wrap;
+    animation: fadeIn 1.2s ease-in 0.3s backwards;
 }
 
 /*button*/
@@ -161,7 +174,7 @@ main {
 
 .btn-primary:hover {
     background-color: var(--secondary-color);
-    transform: translateY(-2px);
+    transform: translateY(-2px) scale(1.05);
     box-shadow: var(--shadow-hover);
 }
 
@@ -174,7 +187,7 @@ main {
 .btn-secondary:hover {
     background-color: var(--primary-color);
     color: white;
-    transform: translateY(-2px);
+    transform: translateY(-2px) scale(1.05);
     box-shadow: var(--shadow-hover);
 }
 
@@ -210,7 +223,7 @@ main {
 }
 
 .feature-card:hover {
-    transform: translateY(-5px);
+    transform: translateY(-5px) scale(1.03);
     box-shadow: var(--shadow-hover);
     border-color: var(--primary-color);
 }
@@ -237,9 +250,22 @@ main {
     border: 2px solid var(--border-color);
     display: flex;
     flex-direction: column;
+    animation: fadeInUp 0.5s ease forwards;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 .book-card:hover {
+    transform: translateY(-5px) scale(1.02);
     box-shadow: var(--shadow-hover);
 }
 

@@ -134,4 +134,13 @@
 
 area {
     cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+area:hover {
+    filter: brightness(1.2);
+}
+
+area:active {
+    filter: brightness(0.9);
 }
