@@ -772,7 +772,7 @@ footer {
     margin-top: 1rem;
 }
 
-/* Dark Mode */
+/* Dark Mode 
 body.dark-theme {
     background-color: #1a1a1a;
 }
@@ -841,4 +841,4 @@ body.dark-theme .filter-select {
 
 #themeToggle:hover {
     transform: scale(1.2);
-}
+} */
