@@ -70,8 +70,8 @@ function createBookCard(book, showActions = true) {
         actionsHTML = `
             <div class="book-actions">
                 ${!isRead ? `<button class="btn btn-primary btn-small" onclick='addToRead(${bookIdString})'>
-                    ${isInPlan ? 'Оқылды ✓' : 'Оқылды'}
-                </button>` : '<button class="btn btn-small" style="background: #4CAF50; color: white;" disabled>Оқылды ✓</button>'}
+                    ${isInPlan ? 'Тапсырыс берілді ✓' : 'Тапсырыс беру'}
+                </button>` : '<button class="btn btn-small" style="background: #4CAF50; color: white;" disabled>тапсырыс берілді ✓</button>'}
                 ${!isRead && !isInPlan ? `<button class="btn btn-secondary btn-small" onclick='addToPlan(${bookIdString})'>Жоспарға</button>` : ''}
             </div>
         `;
@@ -231,8 +231,6 @@ function initSearch() {
         }
     });
     
-    // Убираем фильтр по жанру (он не нужен для API поиска)
-    // genreFilter.addEventListener('change', performSearch);
 }
 
 async function performSearch() {
@@ -260,10 +258,6 @@ async function performSearch() {
     } catch (error) {
         grid.innerHTML = '<div style="grid-column: 1/-1; text-align: center; padding: 2rem; color: red;">Іздеу қатесі</div>';
     }
-}
-
-async function displayAllBooks() {
-    await performSearch();
 }
 
 function displaySearchResults(books) {
@@ -368,7 +362,7 @@ function loadMyBooks() {
             
             const readBtn = document.createElement('button');
             readBtn.className = 'btn btn-primary btn-small';
-            readBtn.textContent = 'Оқылды';
+            readBtn.textContent = 'Тапсырыс беру';
             readBtn.onclick = () => {
                 booksCache = [book]; // Временно добавляем в кэш
                 addToRead(book.id);

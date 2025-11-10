@@ -86,10 +86,6 @@ h3 {
     font-family: 'Merriweather', serif;
 }
 
-.logo svg {
-    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
-}
-
 .nav-links {
     display: flex;
     list-style: none;
@@ -925,4 +921,73 @@ footer::before {
     transform: rotate(360deg);
 }
 
- 
+/* Dark Mode */
+body.dark-theme {
+    background-color: #1a1a1a;
+}
+
+body.dark-theme .book-card,
+body.dark-theme .feature-card,
+body.dark-theme .about-card,
+body.dark-theme .schedule-card,
+body.dark-theme .location-card,
+body.dark-theme .floor-plan-container,
+body.dark-theme .modal-content,
+body.dark-theme .filters,
+body.dark-theme .empty-state,
+body.dark-theme .no-results,
+body.dark-theme .stat-card,
+body.dark-theme .tech-item,
+body.dark-theme .modal-features {
+    background-color: #2a2a2a;
+    color: #e0e0e0;
+    border-color: #3a3a3a;
+}
+
+body.dark-theme .book-title,
+body.dark-theme .feature-card h3,
+body.dark-theme .about-card h2,
+body.dark-theme .about-card h3,
+body.dark-theme .schedule-card h3,
+body.dark-theme .location-card h3,
+body.dark-theme .floor-plan-container h2,
+body.dark-theme .modal-content h2,
+body.dark-theme h1, 
+body.dark-theme h2, 
+body.dark-theme h3 {
+    color: #e0e0e0;
+}
+
+body.dark-theme .book-genre,
+body.dark-theme .instruction,
+body.dark-theme .location-info p,
+body.dark-theme .additional-info p,
+body.dark-theme p {
+    color: #b0b0b0;
+}
+
+body.dark-theme .schedule-table tbody tr:hover,
+body.dark-theme .tab-btn:hover {
+    background-color: #3a3a3a;
+}
+
+body.dark-theme .search-input,
+body.dark-theme .filter-select {
+    background-color: #2a2a2a;
+    color: #e0e0e0;
+    border-color: #3a3a3a;
+}
+
+#themeToggle {
+    background: none;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+    padding: 0.5rem 1rem;
+    color: var(--light-color);
+    transition: transform 0.3s ease;
+}
+
+#themeToggle:hover {
+    transform: scale(1.2);
+}
