@@ -232,8 +232,6 @@ function initSearch() {
         }
     });
     
-    // Убираем фильтр по жанру (он не нужен для API поиска)
-    // genreFilter.addEventListener('change', performSearch);
 }
 
 async function performSearch() {
@@ -261,10 +259,6 @@ async function performSearch() {
     } catch (error) {
         grid.innerHTML = '<div style="grid-column: 1/-1; text-align: center; padding: 2rem; color: red;">Іздеу қатесі</div>';
     }
-}
-
-async function displayAllBooks() {
-    await performSearch();
 }
 
 function displaySearchResults(books) {

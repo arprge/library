@@ -21,6 +21,7 @@
                     <li><a href="search.html">Кітап іздеу</a></li>
                     <li><a href="my-books.html">Менің кітаптарым</a></li>
                     <li><a href="about.html">Кітапхана туралы</a></li>
+                    <li><button id="themeToggle" aria-label="Тема ауыстыру">🌙</button></li>
                 </ul>
             </div>
         </nav>
@@ -59,7 +60,7 @@
         
         <div class="schedule-container">
             <div class="schedule-card">
-                <h3>📅 Апта бойынша жұмыс кестесі</h3>
+                <h3>Апта бойынша жұмыс кестесі</h3>
                 <table class="schedule-table">
                     <thead>
                         <tr>
@@ -101,7 +102,7 @@
             </div>
 
             <div class="location-card">
-                <h3>📍 Орналасқан жері</h3>
+                <h3>Орналасқан жері</h3>
                 <div class="location-info">
                     <p><strong>Алатау қаласының орталық кітапханасы</strong></p>
                     <p>📧 Email: library@alatau.kz</p>
@@ -110,15 +111,15 @@
                 </div>
                 
                 <div class="additional-info">
-                    <h4>⏰ Түскі үзіліс</h4>
-                    <p>13:00 – 14:00 (барлық күндері)</p>
+                    <h4>Түскі үзіліс</h4>
+                    <p> - 13:00 – 14:00 (барлық күндері)</p>
                     
-                    <h4>📚 Кітап беру қызметі</h4>
-                    <p>Жұмыс уақыты ішінде</p>
+                    <h4>Кітап беру қызметі</h4>
+                    <p> - Жұмыс уақыты ішінде</p>
                     
-                    <h4>🎯 Оқу залдары</h4>
-                    <p>Дүйсенбі - Жұма: 08:30 – 20:30</p>
-                    <p>Сенбі: 09:30 – 17:30</p>
+                    <h4>Оқу залдары</h4>
+                    <p> - Дүйсенбі - Жұма: 08:30 – 20:30</p>
+                    <p> - Сенбі: 09:30 – 17:30</p>
                 </div>
             </div>
         </div>
@@ -148,11 +149,7 @@
         </section>
     </main>
 
-    <footer>
-        <div class="container">
-            <p>&copy; 2025 Кітапхана. Алжан Алан</p>
-        </div>
-    </footer>
+    
 
     <!-- Scroll to top button -->
     <button class="scroll-to-top" id="scrollToTop" aria-label="Жоғарыға оралу">↑</button>
@@ -188,10 +185,7 @@
             <span class="close" onclick="closeModal('modal2')">&times;</span>
             <h2>Оқу залы</h2>
             <div class="modal-image">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/>
-                    <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
-                </svg>
+                <img src="assets/images/chitzal.jpg" alt="Оқу залы" width="100" height="100">
             </div>
             <p>Оқу залы - кітапханың негізгі аймағы, мұнда келушілер тыныш ортада кітап оқи алады.</p>
             <div class="modal-features">
@@ -213,15 +207,11 @@
             <span class="close" onclick="closeModal('modal3')">&times;</span>
             <h2>Коворкинг кеңістігі</h2>
             <div class="modal-image">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
-                    <circle cx="9" cy="7" r="4"/>
-                    <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
-                    <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
-                </svg>
+                <img src="assets/images/coworking.jpeg" alt="Коворкинг кеңістігі" width="100" height="100">
             </div>
             <p>Топтық жұмыс пен ынтымақтастыққа арналған заманауи кеңістік.</p>
             <div class="modal-features">
+
                 <strong>Мүмкіндіктер:</strong>
                 <ul>
                     <li>Топтық жұмыс үстелдері</li>
@@ -265,10 +255,7 @@
             <span class="close" onclick="closeModal('modal5')">&times;</span>
             <h2>Кіреберіс</h2>
             <div class="modal-image">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
-                    <polyline points="9 22 9 12 15 12 15 22"/>
-                </svg>
+                <img src="assets/images/прихожка.jpg" alt="Кіреберіс" width="100" height="100">
             </div>
             <p>Кітапхананың негізгі кіреберісі мен қабылдау аймағы. Келушілерді қарсы алу орны.</p>
             <div class="modal-features">
@@ -291,13 +278,7 @@
             <h2>Тіркеу және беру үстелі
             </h2>
             <div class="modal-image">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
-                    <polyline points="14 2 14 8 20 8"/>
-                    <line x1="16" y1="13" x2="8" y2="13"/>
-                    <line x1="16" y1="17" x2="8" y2="17"/>
-                    <polyline points="10 9 9 9 8 9"/>
-                </svg>
+                <img src="assets/images/reception.jpg" alt="Тіркеу және беру үстелі" width="100" height="100">
             </div>
             <p>Кітаптарды тіркеу, беру және қайтару жүргізілетін негізгі қызмет аймағы.</p>
             <div class="modal-features">
@@ -313,5 +294,13 @@
             </div>
         </div>
     </div>
+
+
+
+<footer>
+    <div class="container">
+        <p>&copy; 2025 Алжан Алан | Satbayev University</p>
+    </div>
+</footer>
 </body>
 </html>
