@@ -70,8 +70,8 @@ function createBookCard(book, showActions = true) {
         actionsHTML = `
             <div class="book-actions">
                 ${!isRead ? `<button class="btn btn-primary btn-small" onclick='addToRead(${bookIdString})'>
-                    ${isInPlan ? 'Оқылды ✓' : 'Оқылды'}
-                </button>` : '<button class="btn btn-small" style="background: #4CAF50; color: white;" disabled>Оқылды ✓</button>'}
+                    ${isInPlan ? 'Тапсырыс берілді ✓' : 'Тапсырыс беру'}
+                </button>` : '<button class="btn btn-small" style="background: #4CAF50; color: white;" disabled>тапсырыс берілді ✓</button>'}
                 ${!isRead && !isInPlan ? `<button class="btn btn-secondary btn-small" onclick='addToPlan(${bookIdString})'>Жоспарға</button>` : ''}
             </div>
         `;
@@ -363,7 +363,7 @@ function loadMyBooks() {
             
             const readBtn = document.createElement('button');
             readBtn.className = 'btn btn-primary btn-small';
-            readBtn.textContent = 'Оқылды';
+            readBtn.textContent = 'Тапсырыс беру';
             readBtn.onclick = () => {
                 booksCache = [book]; // Временно добавляем в кэш
                 addToRead(book.id);
