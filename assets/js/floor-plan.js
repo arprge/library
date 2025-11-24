@@ -71,27 +71,4 @@ if (navbar) {
     });
 }
 
-// Dark theme toggle
-function toggleTheme() {
-    document.body.classList.toggle('dark-theme');
-    const icon = document.getElementById('themeToggle');
-    if (icon) {
-        icon.textContent = document.body.classList.contains('dark-theme') ? '☀️' : '🌙';
-    }
-    localStorage.setItem('theme', document.body.classList.contains('dark-theme') ? 'dark' : 'light');
-}
-
-// Load saved theme
-if (localStorage.getItem('theme') === 'dark') {
-    document.body.classList.add('dark-theme');
-    const icon = document.getElementById('themeToggle');
-    if (icon) {
-        icon.textContent = '☀️';
-    }
-}
-
-// Attach theme toggle to button
-const themeToggle = document.getElementById('themeToggle');
-if (themeToggle) {
-    themeToggle.addEventListener('click', toggleTheme);
-}
+// Theme toggle removed: UI no longer exposes day/night switch
