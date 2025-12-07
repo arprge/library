@@ -1,5 +1,5 @@
 {
-  "name": "my-worker",
-  "main": "assets/index.ts",
-  "compatibility_date": "2025-12-07"
+  "name": "library",
+  "compatibility_date": "2025-12-07",
+  "pages_build_output_dir": "."
 }
