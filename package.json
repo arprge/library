@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "description": "Library static site",
   "scripts": {
-    "deploy": "echo 'Deploying static site'"
+    "build": "echo 'Building static site... Done.'",
+    "deploy": "echo 'Deploying static site... Done.'"
   },
   "devDependencies": {
     "wrangler": "^3.0.0"
