@@ -380,6 +380,7 @@ main {
     line-height: 1.3;
     font-weight: 600;
     display: -webkit-box;
+    line-clamp: 2;
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
     overflow: hidden;
@@ -694,6 +695,8 @@ main {
     padding: 2rem;
     box-shadow: var(--shadow-hover);
     position: relative;
+    max-height: 90vh;
+    overflow-y: auto;
 }
 
 .auth-dialog h2 {
@@ -1049,4 +1052,26 @@ footer {
 @keyframes slideOut {
     from { transform: translateX(0); opacity: 1; }
     to { transform: translateX(400px); opacity: 0; }
+}
+
+/* Auth Form Validation */
+.auth-form input.error {
+    border-color: #d32f2f;
+    background-color: #fff8f8;
+}
+
+.auth-form input.error:focus {
+    box-shadow: 0 0 0 2px rgba(211, 47, 47, 0.1);
+    border-color: #d32f2f;
+}
+
+.input-error-message {
+    color: #d32f2f;
+    font-size: 0.8rem;
+    margin-top: 0.25rem;
+    display: none;
+}
+
+.input-group.has-error .input-error-message {
+    display: block;
 }

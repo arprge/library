@@ -339,6 +339,7 @@ function initAuth() {
     const setMode = (mode) => {
         authTabs.forEach(tab => tab.classList.toggle('active', tab.dataset.authTab === mode));
         authForms.forEach(form => form.classList.toggle('active', form.dataset.authForm === mode));
+        clearErrors();
     };
 
     const openModal = (mode = 'login') => {
@@ -354,6 +355,29 @@ function initAuth() {
         document.body.style.overflow = '';
         loginForm?.reset();
         registerForm?.reset();
+        clearErrors();
+    };
+
+    const showError = (input, message) => {
+        const group = input.closest('.input-group');
+        input.classList.add('error');
+        
+        let errorMsg = group.querySelector('.input-error-message');
+        if (!errorMsg) {
+            errorMsg = document.createElement('div');
+            errorMsg.className = 'input-error-message';
+            group.appendChild(errorMsg);
+        }
+        errorMsg.textContent = message;
+        group.classList.add('has-error');
+    };
+
+    const clearErrors = () => {
+        document.querySelectorAll('.input-group.has-error').forEach(group => {
+            group.classList.remove('has-error');
+            const input = group.querySelector('input');
+            if (input) input.classList.remove('error');
+        });
     };
 
     const updateButton = () => {
@@ -361,9 +385,11 @@ function initAuth() {
         if (currentUser) {
             loginBtn.textContent = currentUser;
             loginBtn.classList.add('btn-logged');
+            loginBtn.title = 'Шығу үшін басыңыз';
         } else {
             loginBtn.textContent = 'Кіру';
             loginBtn.classList.remove('btn-logged');
+            loginBtn.title = '';
         }
     };
 
@@ -372,7 +398,7 @@ function initAuth() {
     loginBtn.addEventListener('click', () => {
         const currentUser = localStorage.getItem(CURRENT_USER_KEY);
         if (currentUser) {
-            if (confirm('Шығу керек пе?')) {
+            if (confirm('Сіз жүйеден шыққыңыз келе ме?')) {
                 localStorage.removeItem(CURRENT_USER_KEY);
                 updateButton();
                 showNotification('Сіз жүйеден шықтыңыз');
@@ -393,38 +419,100 @@ function initAuth() {
 
     loginForm?.addEventListener('submit', (event) => {
         event.preventDefault();
-        const username = document.getElementById('authLogin').value.trim();
-        const password = document.getElementById('authPassword').value.trim();
-        const users = JSON.parse(localStorage.getItem(USERS_KEY) || '[]');
-        const match = users.find(user => user.username === username && user.password === password);
-        if (!match) {
-            showNotification('Қате логин немесе құпия сөз');
+        clearErrors();
+        
+        const usernameInput = document.getElementById('authLogin');
+        const passwordInput = document.getElementById('authPassword');
+        const username = usernameInput.value.trim();
+        const password = passwordInput.value.trim();
+        
+        if (!username) {
+            showError(usernameInput, 'Логинді енгізіңіз');
             return;
         }
+        if (!password) {
+            showError(passwordInput, 'Құпия сөзді енгізіңіз');
+            return;
+        }
+
+        const users = JSON.parse(localStorage.getItem(USERS_KEY) || '[]');
+        const match = users.find(user => user.username === username && user.password === password);
+        
+        if (!match) {
+            showError(passwordInput, 'Қате логин немесе құпия сөз');
+            return;
+        }
+        
         localStorage.setItem(CURRENT_USER_KEY, username);
         closeModal();
         updateButton();
-        showNotification('Сәтті кірдіңіз');
+        showNotification('Қош келдіңіз, ' + username + '!');
     });
 
     registerForm?.addEventListener('submit', (event) => {
         event.preventDefault();
-        const username = document.getElementById('authRegLogin').value.trim();
-        const password = document.getElementById('authRegPassword').value.trim();
-        if (username.length < 3 || password.length < 4) {
-            showNotification('Кемінде 3 таңбалы логин және 4 таңбалы құпия сөз');
-            return;
+        clearErrors();
+        
+        const nameInput = document.getElementById('authRegName');
+        const emailInput = document.getElementById('authRegEmail');
+        const usernameInput = document.getElementById('authRegLogin');
+        const passwordInput = document.getElementById('authRegPassword');
+        const confirmPasswordInput = document.getElementById('authRegPasswordConfirm');
+        
+        const name = nameInput.value.trim();
+        const email = emailInput.value.trim();
+        const username = usernameInput.value.trim();
+        const password = passwordInput.value.trim();
+        const confirmPassword = confirmPasswordInput.value.trim();
+        
+        let isValid = true;
+
+        if (!name) {
+            showError(nameInput, 'Аты-жөніңізді енгізіңіз');
+            isValid = false;
         }
+
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(email)) {
+            showError(emailInput, 'Дұрыс email енгізіңіз');
+            isValid = false;
+        }
+
+        if (username.length < 3) {
+            showError(usernameInput, 'Логин кемінде 3 таңбадан тұруы керек');
+            isValid = false;
+        }
+        
+        if (password.length < 6) {
+            showError(passwordInput, 'Құпия сөз кемінде 6 таңбадан тұруы керек');
+            isValid = false;
+        }
+
+        if (password !== confirmPassword) {
+            showError(confirmPasswordInput, 'Құпия сөздер сәйкес келмейді');
+            isValid = false;
+        }
+
+        if (!isValid) return;
+
         const users = JSON.parse(localStorage.getItem(USERS_KEY) || '[]');
         if (users.some(user => user.username === username)) {
-            showNotification('Бұл логин қолданылып жатыр');
+            showError(usernameInput, 'Бұл логин бос емес');
             return;
         }
-        users.push({ username, password });
+        
+        users.push({ 
+            name,
+            email,
+            username, 
+            password,
+            registrationDate: new Date().toISOString()
+        });
+        
         localStorage.setItem(USERS_KEY, JSON.stringify(users));
         localStorage.setItem(CURRENT_USER_KEY, username);
         closeModal();
         updateButton();
-        showNotification('Тіркелу сәтті өтті');
+        showNotification('Тіркелу сәтті аяқталды!');
     });
 }
