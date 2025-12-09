@@ -1,14 +1,21 @@
 // === Работа с LocalStorage ===
 const Storage = {
-    getReadBooks: () => JSON.parse(localStorage.getItem('readBooks') || '[]'),
-    getPlanBooks: () => JSON.parse(localStorage.getItem('planBooks') || '[]'),
+    getCurrentUser: () => localStorage.getItem('libCurrentUser'),
+    
+    getStorageKey: (type) => {
+        const user = Storage.getCurrentUser();
+        return user ? `${type}_${user}` : type;
+    },
+
+    getReadBooks: () => JSON.parse(localStorage.getItem(Storage.getStorageKey('readBooks')) || '[]'),
+    getPlanBooks: () => JSON.parse(localStorage.getItem(Storage.getStorageKey('planBooks')) || '[]'),
     
     addToReadBooks: (book) => {
         const readBooks = Storage.getReadBooks();
         if (readBooks.find(b => b.id === book.id)) return false;
         
         readBooks.push(book);
-        localStorage.setItem('readBooks', JSON.stringify(readBooks));
+        localStorage.setItem(Storage.getStorageKey('readBooks'), JSON.stringify(readBooks));
         Storage.removeFromPlanBooks(book.id);
         return true;
     },
@@ -18,18 +25,18 @@ const Storage = {
         if (planBooks.find(b => b.id === book.id)) return false;
         
         planBooks.push(book);
-        localStorage.setItem('planBooks', JSON.stringify(planBooks));
+        localStorage.setItem(Storage.getStorageKey('planBooks'), JSON.stringify(planBooks));
         return true;
     },
     
     removeFromReadBooks: (bookId) => {
         const readBooks = Storage.getReadBooks().filter(b => b.id !== bookId);
-        localStorage.setItem('readBooks', JSON.stringify(readBooks));
+        localStorage.setItem(Storage.getStorageKey('readBooks'), JSON.stringify(readBooks));
     },
     
     removeFromPlanBooks: (bookId) => {
         const planBooks = Storage.getPlanBooks().filter(b => b.id !== bookId);
-        localStorage.setItem('planBooks', JSON.stringify(planBooks));
+        localStorage.setItem(Storage.getStorageKey('planBooks'), JSON.stringify(planBooks));
     },
     
     isInReadBooks: (bookId) => Storage.getReadBooks().some(b => b.id === bookId),
@@ -402,6 +409,7 @@ function initAuth() {
                 localStorage.removeItem(CURRENT_USER_KEY);
                 updateButton();
                 showNotification('Сіз жүйеден шықтыңыз');
+                setTimeout(() => window.location.reload(), 1000);
             }
             return;
         }
@@ -447,6 +455,7 @@ function initAuth() {
         closeModal();
         updateButton();
         showNotification('Қош келдіңіз, ' + username + '!');
+        setTimeout(() => window.location.reload(), 1000);
     });
 
     registerForm?.addEventListener('submit', (event) => {
@@ -454,13 +463,11 @@ function initAuth() {
         clearErrors();
         
         const nameInput = document.getElementById('authRegName');
-        const emailInput = document.getElementById('authRegEmail');
         const usernameInput = document.getElementById('authRegLogin');
         const passwordInput = document.getElementById('authRegPassword');
         const confirmPasswordInput = document.getElementById('authRegPasswordConfirm');
         
         const name = nameInput.value.trim();
-        const email = emailInput.value.trim();
         const username = usernameInput.value.trim();
         const password = passwordInput.value.trim();
         const confirmPassword = confirmPasswordInput.value.trim();
@@ -469,12 +476,6 @@ function initAuth() {
 
         if (!name) {
             showError(nameInput, 'Аты-жөніңізді енгізіңіз');
-            isValid = false;
-        }
-
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        if (!emailRegex.test(email)) {
-            showError(emailInput, 'Дұрыс email енгізіңіз');
             isValid = false;
         }
 
@@ -503,7 +504,6 @@ function initAuth() {
         
         users.push({ 
             name,
-            email,
             username, 
             password,
             registrationDate: new Date().toISOString()
@@ -514,5 +514,6 @@ function initAuth() {
         closeModal();
         updateButton();
         showNotification('Тіркелу сәтті аяқталды!');
+        setTimeout(() => window.location.reload(), 1000);
     });
 }
